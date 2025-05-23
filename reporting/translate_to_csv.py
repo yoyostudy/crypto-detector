@@ -68,7 +68,7 @@ def process_files():
                     writer = csv.writer(file)
 
                     writer.writerow(["File Paths", "Evidence Type", "Detection Method", "Match", \
-                        "Line Number", "Source Matched", "Index Begin", "Index End"])
+                        "Line Number", "Source Matched", "Index Begin", "Index End", "Match Line"])
 
                     for file_sha1 in crypto_data["crypto_evidence"]:
                         for hit in crypto_data["crypto_evidence"][file_sha1]["hits"]:
@@ -106,7 +106,9 @@ def process_files():
                                 hit["line_number"],
                                 source,
                                 hit["line_index_begin"],
-                                hit["line_index_end"]])
+                                hit["line_index_end"], 
+                                hit["line_text"]
+                                ])
             except:
                 if os.path.isfile(csv_filename):
                     os.remove(csv_filename)
